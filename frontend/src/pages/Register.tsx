@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { authAPI } from '../utils/api';
 import { useAuth } from '../context/AuthContext';
-import { captureFaceImage, loadModels } from '../utils/faceApi';
+import { captureFaceImage, loadModels, detectFace } from '../utils/faceApi';
 import {
   formatAadhaarInput,
   calculatePasswordStrength,
@@ -133,8 +133,37 @@ export default function Register() {
 
   const captureFaceAuto = async () => {
     try {
+      if (!videoRef.current) {
+        toast.error('Camera not available');
+        return;
+      }
+
+      // Wait for video to be fully ready
+      let retries = 0;
+      while ((videoRef.current.readyState || 0) < 2 && retries < 10) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        retries++;
+      }
+
+      if ((videoRef.current.readyState || 0) < 2) {
+        toast.error('Camera not ready. Please try again.');
+        return;
+      }
+
+      // Use real face detection from face-api.js
+      // Moderate threshold (0.35) for reliable face detection
+      const detections = await detectFace(videoRef.current, 0.35);
+
+      if (!detections) {
+        toast.error('No face detected. Please position your face clearly in the camera.');
+        return;
+      }
+
+      const descriptor = Array.from(detections.descriptor);
+      const confidence = Math.min(100, (detections.detection.score * 100));
+
       let image = '';
-      if (videoRef.current && videoRef.current.readyState >= 2 && canvasRef.current) {
+      if (canvasRef.current) {
         image = captureFaceImage(videoRef.current, canvasRef.current) || '';
       }
 
@@ -145,13 +174,13 @@ export default function Register() {
 
       setFaceData({
         image: image || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==',
-        descriptor: Array(128).fill(0.1),
-        confidence: 95 + Math.random() * 5, // Mock confidence 95-100%
+        descriptor: descriptor,
+        confidence: confidence,
       });
-      toast.success('Photo captured successfully!');
+      toast.success('Face captured successfully!');
     } catch (error) {
       console.error('Photo capture error:', error);
-      toast.error('Photo capture failed. Please try again.');
+      toast.error('Face capture failed. Please try again.');
     }
   };
 

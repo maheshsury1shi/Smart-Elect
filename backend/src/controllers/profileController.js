@@ -186,13 +186,20 @@ export const verifyVoterByFace = async (req, res) => {
 
     console.log(`Face verification - Distance: ${faceDistance}`);
 
-    // For demo purposes, allow any distance (set high threshold)
-    // In production, use 0.5-0.6 for real face verification
-    const threshold = 0.8; // Relaxed for demo
+    // Strict threshold: 0.4 - faces must very closely match
+    // Lower = stricter matching required
+    const threshold = 0.4;
     if (faceDistance > threshold) {
-      console.warn(`Face distance ${faceDistance} exceeds threshold ${threshold}, but allowing for demo`);
+      console.warn(`Face distance ${faceDistance} exceeds threshold ${threshold} - REJECTION (DIFFERENT PERSON)`);
+      return res.status(400).json({
+        message: 'Face does not match. Your face does not match the registered photo.',
+        errorType: 'face_not_matched',
+        verified: false,
+        distance: faceDistance.toFixed(3),
+      });
     }
 
+    console.log(`Face verification APPROVED - Distance ${faceDistance} within threshold ${threshold}`);
     res.json({
       message: 'Verification successful',
       profileId: profile._id,

@@ -2,6 +2,46 @@
 
 A complete full-stack voting application with advanced facial recognition security, built for college demonstration purposes.
 
+---
+
+## 🚀 **RUN ON YOUR MACHINE** (Complete Step-by-Step Guide)
+
+> **👉 [READ THIS FIRST: RUN_ON_YOUR_MACHINE.md](RUN_ON_YOUR_MACHINE.md)** - Full guide for GitHub clone or .zip download
+
+### Quick Commands (if you know what you're doing):
+```bash
+# Clone from GitHub
+git clone https://github.com/YOUR_USERNAME/election-voting-system.git
+cd election-voting-system
+
+# Backend setup
+cd backend && cp .env.example .env && npm install && npm run seed
+
+# Frontend setup
+cd ../frontend && npm install
+
+# Terminal 1: cd backend && npm run dev     # Port 5000
+# Terminal 2: cd frontend && npm run dev    # Port 5173
+
+# Open: http://localhost:5173
+```
+
+**Demo Credentials:**
+- Email: `admin@voting.com`  
+- Password: `Admin@123456`
+
+---
+
+## 📚 Documentation
+
+- **[RUN_ON_YOUR_MACHINE.md](RUN_ON_YOUR_MACHINE.md)** ⭐ START HERE - Complete guide to run project
+- **[QUICK_START.md](QUICK_START.md)** - 5-minute setup summary
+- **[SETUP_TROUBLESHOOTING.md](SETUP_TROUBLESHOOTING.md)** - Fix common errors
+- **[DOCUMENTATION.md](DOCUMENTATION.md)** - All guides at a glance
+- **[PROJECT_COMPLETE_DOCUMENTATION.md](PROJECT_COMPLETE_DOCUMENTATION.md)** - Technical deep-dive
+
+---
+
 ## 🌟 Features
 
 - **Facial Recognition Security** - face-api.js powered face detection and verification

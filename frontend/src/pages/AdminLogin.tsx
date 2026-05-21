@@ -89,12 +89,6 @@ export default function AdminLogin() {
           </motion.button>
         </form>
 
-        <div className="mt-6 p-4 bg-slate-800 rounded-lg text-sm text-slate-400">
-          <p className="font-semibold mb-2">Demo Credentials:</p>
-          <p>📧 admin@voting.com</p>
-          <p>🔑 Admin@123456</p>
-        </div>
-
         <div className="mt-6 text-center">
           <button
             onClick={() => (window.location.href = '/')}

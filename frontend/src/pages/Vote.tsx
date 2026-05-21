@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'sonner';
 import { resultsAPI, candidateAPI, voteAPI, profileAPI } from '../utils/api';
-import { hashAadhaar, loadModels } from '../utils/faceApi';
+import { hashAadhaar, loadModels, detectFace } from '../utils/faceApi';
 import { formatAadhaarInput } from '../utils/validation';
 import {
   convertDistanceToConfidence,
@@ -185,17 +185,42 @@ export default function Vote() {
     try {
       votingLogger.logStep('face-capture', 'Face capture initiated');
 
-      // For demo purposes, use dummy face data if camera is not available
-      if (videoRef.current && videoRef.current.readyState >= 2) {
-        // Camera is available, would capture real face data here
+      if (!videoRef.current) {
+        toast.error('Camera not available');
+        votingLogger.logStep('face-capture', 'Camera not available');
+        return;
       }
 
-      // Set dummy face descriptor for demo/testing
-      setFaceDescriptor(Array(128).fill(0.1));
-      const mockConfidence = 85 + Math.random() * 15; // 85-100%
-      setConfidenceScore(mockConfidence);
+      // Wait for video to be fully ready
+      let retries = 0;
+      while ((videoRef.current.readyState || 0) < 2 && retries < 10) {
+        await new Promise(resolve => setTimeout(resolve, 100));
+        retries++;
+      }
 
-      votingLogger.logStep('face-capture', 'Face captured', { confidence: mockConfidence });
+      if ((videoRef.current.readyState || 0) < 2) {
+        toast.error('Camera not ready. Please try again.');
+        votingLogger.logStep('face-capture', 'Camera not ready');
+        return;
+      }
+
+      // Use real face detection from face-api.js
+      // Moderate threshold (0.35) for reliable face detection
+      const detections = await detectFace(videoRef.current, 0.35);
+
+      if (!detections) {
+        toast.error('No face detected. Please position your face clearly in the camera.');
+        votingLogger.logStep('face-capture', 'No face detected');
+        return;
+      }
+
+      const descriptor = Array.from(detections.descriptor);
+      const confidence = Math.min(100, (detections.detection.score * 100));
+
+      setFaceDescriptor(descriptor);
+      setConfidenceScore(confidence);
+
+      votingLogger.logStep('face-capture', 'Face captured', { confidence: confidence });
       toast.success('Face captured successfully');
       trackActivity();
     } catch (error) {
