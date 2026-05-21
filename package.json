@@ -1,0 +1,13 @@
+{
+  "name": "election-voting-system",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "start:backend": "npm --prefix backend run start",
+    "build:frontend": "npm --prefix frontend run build",
+    "seed": "npm --prefix backend run seed"
+  }
+}
