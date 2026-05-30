@@ -158,7 +158,7 @@ cd ../frontend && npm install
 ---
 
 ## 🚀 Common Next Steps
-
+7066306553
 ### Want to Customize?
 1. Change candidates: Edit in Admin Dashboard
 2. Change colors: Modify `frontend/tailwind.config.js`
