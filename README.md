@@ -4,9 +4,7 @@ A complete full-stack voting application with advanced facial recognition securi
 
 ---
 
-## 🚀 **RUN ON YOUR MACHINE** (Complete Step-by-Step Guide)
-
-> **👉 [READ THIS FIRST: RUN_ON_YOUR_MACHINE.md](RUN_ON_YOUR_MACHINE.md)** - Full guide for GitHub clone or .zip download
+## 🚀 Quick Setup
 
 ### Quick Commands (if you know what you're doing):
 ```bash
@@ -34,11 +32,11 @@ cd ../frontend && npm install
 
 ## 📚 Documentation
 
-- **[RUN_ON_YOUR_MACHINE.md](RUN_ON_YOUR_MACHINE.md)** ⭐ START HERE - Complete guide to run project
-- **[QUICK_START.md](QUICK_START.md)** - 5-minute setup summary
 - **[SETUP_TROUBLESHOOTING.md](SETUP_TROUBLESHOOTING.md)** - Fix common errors
 - **[DOCUMENTATION.md](DOCUMENTATION.md)** - All guides at a glance
 - **[PROJECT_COMPLETE_DOCUMENTATION.md](PROJECT_COMPLETE_DOCUMENTATION.md)** - Technical deep-dive
+- **[backend/README.md](backend/README.md)** - Backend API documentation
+- **[frontend/README.md](frontend/README.md)** - Frontend structure
 
 ---
 

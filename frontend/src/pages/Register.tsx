@@ -609,9 +609,9 @@ export default function Register() {
                 </div>
               </div>
 
-              {/* Zip Code */}
+              {/* Pin Code */}
               <div>
-                <label className="block mb-2 font-semibold text-slate-100">Zip Code</label>
+                <label className="block mb-2 font-semibold text-slate-100">Pin Code</label>
                 <input
                   type="text"
                   name="address.zipCode"

@@ -7,8 +7,8 @@ Complete documentation for Election Voting System.
 ## 📖 Start Here
 
 ### 🚀 **Want to Run the Project?**
-→ See: **[QUICK_START.md](QUICK_START.md)**
-- 5-minute setup
+→ See: **[README.md](README.md)** for setup instructions
+- Quick setup commands
 - Step-by-step instructions
 - Demo credentials included
 
@@ -36,12 +36,11 @@ Complete documentation for Election Voting System.
 
 | Goal | Document |
 |------|----------|
-| **Get it running** | [QUICK_START.md](QUICK_START.md) |
+| **Get it running** | [README.md](README.md) |
 | **Fixing problems** | [SETUP_TROUBLESHOOTING.md](SETUP_TROUBLESHOOTING.md) |
 | **Understanding architecture** | [PROJECT_COMPLETE_DOCUMENTATION.md](PROJECT_COMPLETE_DOCUMENTATION.md) |
 | **Backend API details** | [backend/README.md](backend/README.md) |
 | **Frontend components** | [frontend/README.md](frontend/README.md) |
-| **Main project info** | [README.md](README.md) |
 
 ---
 
@@ -73,9 +72,9 @@ cd ../frontend && npm install
 ## 📂 File Structure Explained
 
 ```
-├── README.md                              ← Main project overview
-├── QUICK_START.md                         ← 5-minute setup guide ⭐
+├── README.md                              ← Main project overview ⭐
 ├── SETUP_TROUBLESHOOTING.md              ← Error solutions
+├── DOCUMENTATION.md                      ← All guides at a glance
 ├── PROJECT_COMPLETE_DOCUMENTATION.md     ← Deep dive docs
 │
 ├── backend/
@@ -112,7 +111,7 @@ cd ../frontend && npm install
 
 ### Beginner
 1. Read [README.md](README.md) - Understand what it does
-2. Follow [QUICK_START.md](QUICK_START.md) - Get it running
+2. Follow setup commands in [README.md](README.md) - Get it running
 3. Register as voter - Test registration flow
 4. Cast vote - Test voting flow
 5. Login as admin - Check dashboard

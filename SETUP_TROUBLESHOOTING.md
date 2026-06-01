@@ -340,7 +340,7 @@ Great! Now explore:
 - Check results declaration
 
 **Next Steps:**
-- Read [QUICK_START.md](QUICK_START.md) for features
+- Read [README.md](README.md) for features and setup
 - Check [PROJECT_COMPLETE_DOCUMENTATION.md](PROJECT_COMPLETE_DOCUMENTATION.md) for deep dive
 - Customize the project for your needs!
 

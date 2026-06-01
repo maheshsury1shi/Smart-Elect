@@ -237,7 +237,7 @@ export default function VoterProfile() {
               )}
               {voterData.address?.zipCode && (
                 <div>
-                  <p className="text-slate-400 text-sm mb-1">Zip Code</p>
+                  <p className="text-slate-400 text-sm mb-1">Pin Code</p>
                   <p className="text-slate-100 font-semibold">{voterData.address.zipCode}</p>
                 </div>
               )}
