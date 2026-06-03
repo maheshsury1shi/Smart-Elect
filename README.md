@@ -76,33 +76,46 @@ cd ../frontend && npm install
 
 ```
 election-voting-system/
-├── frontend/               # React + Vite SPA
+├── README.md                           # Quick start & overview
+├── DOCUMENTATION.md                    # Documentation guide
+├── PROJECT_COMPLETE_DOCUMENTATION.md   # Complete technical docs
+├── SETUP_TROUBLESHOOTING.md            # Setup & troubleshooting
+├── package.json                        # Root configuration
+├── test-hash-consistency.js            # Hash testing utility
+├── setup.sh                            # Setup script
+│
+├── frontend/                           # React + Vite TypeScript SPA
 │   ├── src/
-│   │   ├── pages/         # Route pages
-│   │   ├── components/    # Reusable components
-│   │   ├── context/       # React Context (Auth)
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── utils/         # API & face-api utilities
-│   │   ├── types/         # TypeScript interfaces
-│   │   └── App.tsx        # Main app component
-│   ├── public/            # Static assets & face-api models
+│   │   ├── pages/                      # 8 Route pages (Home, Register, Vote, Results, Admin)
+│   │   ├── components/                 # Reusable components
+│   │   ├── context/                    # React Context (Auth)
+│   │   ├── hooks/                      # Custom React hooks
+│   │   ├── utils/                      # API, face-api, validation
+│   │   ├── types/                      # TypeScript interfaces
+│   │   └── App.tsx                     # Main app & routing
+│   ├── public/models/                  # Pre-downloaded face-api models (18 files)
 │   └── package.json
 │
-├── backend/               # Express API server
+├── backend/                            # Express API server
 │   ├── src/
-│   │   ├── models/        # Mongoose schemas
-│   │   ├── routes/        # API endpoints
-│   │   ├── controllers/   # Route handlers
-│   │   ├── middleware/    # Auth & validation
-│   │   ├── utils/         # Helper functions
-│   │   └── config/        # Database config
+│   │   ├── models/                     # 5 Mongoose schemas
+│   │   ├── routes/                     # 5 API route files
+│   │   ├── controllers/                # 5 Route handlers
+│   │   ├── middleware/                 # Auth & role validation
+│   │   ├── utils/                      # JWT & helper functions
+│   │   └── config/                     # Database configuration
 │   ├── scripts/
-│   │   └── seed.js        # Database seeding
-│   ├── server.js          # Express server entry
+│   │   ├── seed.js                     # Database seeding
+│   │   ├── reset-and-seed.js           # Database reset & reseed
+│   │   └── fix-aadhaar.js              # Aadhaar hash fixes
+│   ├── server.js                       # Express server entry
 │   └── package.json
+│
+├── scripts/
+│   └── dev.mjs                         # Development utilities
 │
 └── .github/
-    └── copilot-instructions.md
+    └── copilot-instructions.md         # AI assistant instructions
 ```
 
 ## 🚀 Quick Start (3 Steps)
@@ -117,38 +130,43 @@ cd backend && npm install
 cd ../frontend && npm install
 ```
 
-### Step 2: Start Everything
+### Step 4: Start Development Servers
+
+**Terminal 1 - Backend:**
 ```bash
-# Windows - Run startup script (opens 2 terminals automatically)
-.\start-app.ps1
-
-# Mac/Linux - Start manually
-# Terminal 1: Backend
-cd backend && npm run seed && npm run dev
-
-# Terminal 2: Frontend  
-cd frontend && npm run dev
+cd backend
+npm run dev
+# Runs on http://localhost:5000
 ```
 
-### Step 3: Access the Application
-- **Frontend:** http://localhost:5173
+**Terminal 2 - Frontend:**
+```bash
+cd frontend
+npm run dev
+# Runs on http://localhost:5173
+```
+
+### Step 5: Access the Application
+- **Frontend:** http://localhost:5173 ⭐ Start here!
 - **Backend API:** http://localhost:5000/api
-- **Admin Login:** admin@voting.com / Admin@123456
+- **Admin Dashboard:** http://localhost:5173/admin/login
+- **Voter Login:** http://localhost:5173/voter/login
 
 ## ✅ Complete Setup Guide
 
 For detailed setup instructions, environment configuration, and troubleshooting:
 📖 See [SETUP_GUIDE.md](SETUP_GUIDE.md)
 
-## 🧪 Testing & Verification
+## 📖 Complete Documentation
 
-For comprehensive testing procedures and verification checklist:
-📋 See [TESTING_GUIDE.md](TESTING_GUIDE.md)
-
-## 🔧 Recent Fixes & Improvements
-
-Complete list of all issues fixed and improvements made:
-🔨 See [FIXES_APPLIED.md](FIXES_APPLIED.md)
+| Document | Purpose |
+|----------|---------|
+| **README.md** | Quick start & overview (you are here) |
+| **DOCUMENTATION.md** | Navigation guide to all docs |
+| **PROJECT_COMPLETE_DOCUMENTATION.md** | Deep technical documentation |
+| **SETUP_TROUBLESHOOTING.md** | Setup issues & solutions |
+| **backend/README.md** | Backend API documentation |
+| **frontend/README.md** | Frontend structure & components |
 JWT_SECRET=your-secret-key-here
 PORT=5000
 FRONTEND_URL=http://localhost:5173

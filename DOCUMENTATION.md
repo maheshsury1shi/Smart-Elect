@@ -69,40 +69,63 @@ cd ../frontend && npm install
 
 ---
 
-## 📂 File Structure Explained
+## 📂 File Structure Explained (Current)
 
 ```
 ├── README.md                              ← Main project overview ⭐
-├── SETUP_TROUBLESHOOTING.md              ← Error solutions
-├── DOCUMENTATION.md                      ← All guides at a glance
-├── PROJECT_COMPLETE_DOCUMENTATION.md     ← Deep dive docs
+├── DOCUMENTATION.md                       ← All guides navigation
+├── SETUP_TROUBLESHOOTING.md               ← Error solutions
+├── PROJECT_COMPLETE_DOCUMENTATION.md      ← Deep technical docs
+├── package.json                           ← Root config
+├── setup.sh                               ← Setup script
+├── test-hash-consistency.js               ← Hash testing
 │
 ├── backend/
-│   ├── README.md                         ← Backend guide
-│   ├── .env.example                      ← Copy to .env
-│   ├── package.json                      ← Dependencies
-│   ├── server.js                         ← Express entry
-│   ├── scripts/seed.js                   ← Database setup
+│   ├── README.md                          ← Backend API guide
+│   ├── server.js                          ← Express entry
+│   ├── package.json                       ← Dependencies
+│   ├── .env.example                       ← Copy to .env
+│   ├── scripts/
+│   │   ├── seed.js                        ← Initial database setup
+│   │   ├── reset-and-seed.js              ← Database reset
+│   │   └── fix-aadhaar.js                 ← Hash consistency fix
 │   └── src/
-│       ├── models/                       ← MongoDB schemas
-│       ├── routes/                       ← API endpoints
-│       ├── controllers/                  ← Business logic
-│       ├── middleware/                   ← Auth & validation
-│       └── utils/                        ← Helpers
+│       ├── config/database.js             ← MongoDB config
+│       ├── models/                        ← 5 Mongoose schemas
+│       ├── routes/                        ← 5 API route files
+│       ├── controllers/                   ← 5 Business logic files
+│       ├── middleware/auth.js             ← JWT & role validation
+│       └── utils/                         ← JWT & helper functions
 │
 ├── frontend/
-│   ├── README.md                         ← Frontend guide
-│   ├── package.json                      ← Dependencies
-│   ├── public/models/                    ← Face-API models
-│   └── src/
-│       ├── pages/                        ← Route pages
-│       ├── components/                   ← React components
-│       ├── context/                      ← State management
-│       ├── utils/                        ← API & helpers
-│       └── types/                        ← TypeScript types
+│   ├── README.md                          ← Frontend structure guide
+│   ├── package.json                       ← Dependencies
+│   ├── src/
+│   │   ├── pages/                         ← 8 Route pages
+│   │   │   ├── Home.tsx                   ← Landing page
+│   │   │   ├── Register.tsx               ← Voter registration
+│   │   │   ├── VoterLogin.tsx             ← Voter authentication
+│   │   │   ├── VoterProfile.tsx           ← Profile view
+│   │   │   ├── Vote.tsx                   ← Voting interface
+│   │   │   ├── Results.tsx                ← Election results
+│   │   │   ├── AdminLogin.tsx             ← Admin authentication
+│   │   │   └── AdminDashboard.tsx         ← Admin control panel
+│   │   ├── components/                    ← ProtectedRoute wrapper
+│   │   ├── context/                       ← AuthContext state
+│   │   ├── hooks/                         ← Custom hooks (extensible)
+│   │   ├── utils/                         ← API, validation, face-api
+│   │   ├── types/                         ← TypeScript interfaces
+│   │   ├── App.tsx                        ← Routing configuration
+│   │   ├── main.tsx                       ← React entry point
+│   │   └── index.css                      ← Global styles
+│   ├── public/models/                     ← 18 pre-downloaded face-api models
+│   └── configuration files                ← vite, tsconfig, tailwind, postcss
+│
+├── scripts/
+│   └── dev.mjs                            ← Development utilities
 │
 └── .github/
-    └── copilot-instructions.md          ← Development notes
+    └── copilot-instructions.md            ← AI assistant instructions
 ```
 
 ---

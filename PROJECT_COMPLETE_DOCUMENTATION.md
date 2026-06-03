@@ -90,127 +90,154 @@
 
 ## 📁 PROJECT STRUCTURE
 
-### Complete Directory Layout
+### Root Directory Files
+The project root contains essential documentation and utility files:
+
+| File/Folder | Purpose |
+|-------------|---------|
+| `PROJECT_COMPLETE_DOCUMENTATION.md` | 📖 Comprehensive project documentation (this file) |
+| `README.md` | 📋 Quick start and project overview |
+| `DOCUMENTATION.md` | 📄 Additional technical documentation |
+| `SETUP_TROUBLESHOOTING.md` | 🔧 Setup and troubleshooting guide |
+| `package.json` | 📦 Root package configuration |
+| `setup.sh` | 🔨 Unix/Linux/Mac setup script |
+| `test-hash-consistency.js` | 🧪 Hash consistency verification utility |
+| `scripts/` | 📂 Development utilities (dev.mjs) |
+| `.github/` | 📂 GitHub config & copilot-instructions.md |
+
+### Current Project Structure
 ```
 election-voting-system/
 │
+├── 📄 DOCUMENTATION.md                # Additional project documentation
+├── 📄 PROJECT_COMPLETE_DOCUMENTATION.md # This complete guide
+├── 📄 README.md                       # Root README
+├── 📄 SETUP_TROUBLESHOOTING.md        # Setup troubleshooting guide
+├── 📄 package.json                    # Root package configuration
+├── 🔧 setup.sh                        # Setup shell script
+├── 🧪 test-hash-consistency.js        # Hash consistency testing utility
+│
 ├── backend/                           # Express API Server
-│   ├── server.js                      # Express entry point
-│   ├── package.json                   # Backend dependencies
-│   ├── README.md                      # Backend documentation
+│   ├── 📄 server.js                   # Express entry point
+│   ├── 📄 package.json                # Backend dependencies
+│   ├── 📄 README.md                   # Backend documentation
 │   │
 │   ├── src/
 │   │   ├── config/
 │   │   │   └── database.js            # MongoDB connection setup
 │   │   │
-│   │   ├── models/                    # Mongoose Schemas
+│   │   ├── models/                    # Mongoose Schemas (5 files)
 │   │   │   ├── User.js                # Authentication & roles
 │   │   │   ├── Profile.js             # Voter information & face data
 │   │   │   ├── Candidate.js           # Candidate details
 │   │   │   ├── Vote.js                # Vote records
 │   │   │   └── Setting.js             # Election settings
 │   │   │
-│   │   ├── controllers/               # Route Handlers
-│   │   │   ├── authController.js      # Registration, login, auth
-│   │   │   ├── profileController.js   # Voter profile management
-│   │   │   ├── candidateController.js # Candidate management
-│   │   │   ├── voteController.js      # Vote processing
-│   │   │   └── resultsController.js   # Results declaration
+│   │   ├── controllers/               # Route Handlers (5 files)
+│   │   │   ├── authController.js      # Registration, login, auth logic
+│   │   │   ├── profileController.js   # Voter profile CRUD operations
+│   │   │   ├── candidateController.js # Candidate CRUD operations
+│   │   │   ├── voteController.js      # Vote processing & validation
+│   │   │   └── resultsController.js   # Results calculation & declaration
 │   │   │
-│   │   ├── routes/                    # API Endpoints
-│   │   │   ├── authRoutes.js          # Auth endpoints
-│   │   │   ├── profileRoutes.js       # Profile endpoints
-│   │   │   ├── candidateRoutes.js     # Candidate endpoints
-│   │   │   ├── voteRoutes.js          # Vote endpoints
-│   │   │   └── resultsRoutes.js       # Results endpoints
+│   │   ├── routes/                    # API Endpoints (5 files)
+│   │   │   ├── authRoutes.js          # /api/auth/* endpoints
+│   │   │   ├── profileRoutes.js       # /api/profiles/* endpoints
+│   │   │   ├── candidateRoutes.js     # /api/candidates/* endpoints
+│   │   │   ├── voteRoutes.js          # /api/votes/* endpoints
+│   │   │   └── resultsRoutes.js       # /api/results/* endpoints
 │   │   │
 │   │   ├── middleware/
-│   │   │   └── auth.js                # Auth & role validation
+│   │   │   └── auth.js                # JWT validation & role-based access control
 │   │   │
 │   │   └── utils/
-│   │       ├── jwt.js                 # JWT token functions
-│   │       └── helpers.js             # Helper functions
+│   │       ├── jwt.js                 # JWT token generation & verification
+│   │       └── helpers.js             # SHA-256 hashing, formatting utilities
 │   │
 │   └── scripts/
-│       ├── seed.js                    # Database seeding (admin + candidates)
-│       ├── reset-and-seed.js          # Database reset
-│       └── fix-aadhaar.js             # Aadhaar hashing fixes
+│       ├── seed.js                    # Database seeding (admin + 3 candidates)
+│       ├── reset-and-seed.js          # Complete database reset & reseed
+│       └── fix-aadhaar.js             # Aadhaar hashing consistency fixes
 │
-├── frontend/                          # React + Vite SPA
-│   ├── index.html                     # HTML entry point
-│   ├── package.json                   # Frontend dependencies
-│   ├── README.md                      # Frontend documentation
-│   ├── vite.config.ts                 # Vite configuration
-│   ├── tsconfig.json                  # TypeScript configuration
-│   ├── tailwind.config.js             # Tailwind CSS config
-│   ├── postcss.config.js              # PostCSS configuration
+├── frontend/                          # React + Vite TypeScript SPA
+│   ├── 📄 index.html                  # HTML entry point
+│   ├── 📄 package.json                # Frontend dependencies
+│   ├── 📄 README.md                   # Frontend documentation
+│   ├── 📄 vite.config.ts              # Vite bundler configuration
+│   ├── 📄 tsconfig.json               # TypeScript configuration
+│   ├── 📄 tsconfig.node.json          # TypeScript Node config
+│   ├── 📄 tailwind.config.js          # Tailwind CSS customization
+│   ├── 📄 postcss.config.js           # PostCSS for CSS processing
 │   │
 │   ├── src/
-│   │   ├── main.tsx                   # React app entry
-│   │   ├── App.tsx                    # Route configuration
-│   │   ├── index.css                  # Global styles
+│   │   ├── main.tsx                   # React app entry point
+│   │   ├── App.tsx                    # Main app component & route configuration
+│   │   ├── index.css                  # Global styles & Tailwind imports
+│   │   ├── vite-env.d.ts              # Vite environment type definitions
 │   │   │
-│   │   ├── pages/                     # Route Pages
-│   │   │   ├── Home.tsx               # Landing page
-│   │   │   ├── Register.tsx           # Multi-step registration
-│   │   │   ├── Vote.tsx               # Voting interface
-│   │   │   ├── Results.tsx            # Election results
+│   │   ├── pages/                     # Route Pages (8 files)
+│   │   │   ├── Home.tsx               # Landing page with feature overview
+│   │   │   ├── Register.tsx           # Multi-step voter registration wizard
+│   │   │   ├── VoterLogin.tsx         # Voter authentication & login
+│   │   │   ├── VoterProfile.tsx       # Voter profile view & management
+│   │   │   ├── Vote.tsx               # Multi-step voting interface
+│   │   │   ├── Results.tsx            # Election results display & charts
 │   │   │   ├── AdminLogin.tsx         # Admin authentication
-│   │   │   ├── AdminDashboard.tsx     # Admin panel
-│   │   │   ├── VoterLogin.tsx         # Voter authentication page
-│   │   │   └── VoterProfile.tsx       # Voter profile page
+│   │   │   └── AdminDashboard.tsx     # Admin control panel & management
 │   │   │
 │   │   ├── components/
-│   │   │   └── ProtectedRoute.tsx     # Route protection wrapper
+│   │   │   └── ProtectedRoute.tsx     # Route protection wrapper for auth
 │   │   │
 │   │   ├── context/
-│   │   │   └── AuthContext.tsx        # Global auth state
+│   │   │   └── AuthContext.tsx        # Global authentication state management
 │   │   │
-│   │   ├── hooks/                     # Custom React hooks (extensible)
+│   │   ├── hooks/                     # Custom React hooks directory
 │   │   │
 │   │   ├── utils/
-│   │   │   ├── api.ts                 # Axios API client
-│   │   │   ├── faceApi.ts             # Face-API utilities
-│   │   │   ├── validation.ts          # Form validation utilities
-│   │   │   └── votingUtils.ts         # Voting-related utilities
+│   │   │   ├── api.ts                 # Axios API client with interceptors
+│   │   │   ├── faceApi.ts             # Face-API.js wrapper utilities
+│   │   │   ├── validation.ts          # Form & data validation functions
+│   │   │   └── votingUtils.ts         # Voting workflow helper utilities
 │   │   │
 │   │   └── types/
-│   │       └── index.ts               # TypeScript interfaces
+│   │       └── index.ts               # TypeScript interfaces & type definitions
 │   │
 │   └── public/
-│       └── models/                    # Face-API pre-trained models
-│           ├── tiny_face_detector_model*
-│           ├── face_landmark_68_model*
-│           ├── face_recognition_model*
-│           ├── age_gender_model*
-│           ├── face_expression_model*
-│           ├── mtcnn_model*
-│           └── ssd_mobilenetv1_model*
-│
-├── .github/
-│   └── copilot-instructions.md        # AI assistant instructions
+│       └── models/                    # Face-API pre-trained models (18 files)
+│           ├── tiny_face_detector_model-shard1
+│           ├── tiny_face_detector_model-weights_manifest.json
+│           ├── face_landmark_68_model-shard1
+│           ├── face_landmark_68_model-weights_manifest.json
+│           ├── face_landmark_68_tiny_model-shard1
+│           ├── face_landmark_68_tiny_model-weights_manifest.json
+│           ├── face_recognition_model-shard1
+│           ├── face_recognition_model-shard2
+│           ├── face_recognition_model-weights_manifest.json
+│           ├── age_gender_model-shard1
+│           ├── age_gender_model-weights_manifest.json
+│           ├── face_expression_model-shard1
+│           ├── face_expression_model-weights_manifest.json
+│           ├── mtcnn_model-shard1
+│           ├── mtcnn_model-weights_manifest.json
+│           ├── ssd_mobilenetv1_model-shard1
+│           ├── ssd_mobilenetv1_model-shard2
+│           └── ssd_mobilenetv1_model-weights_manifest.json
 │
 ├── scripts/
-│   └── dev.mjs                        # Development script utilities
+│   └── dev.mjs                        # Development server utilities
 │
-└── Configuration & Setup Scripts/
-    ├── setup.ps1                      # Automated setup (Windows)
-    ├── start-app.ps1                  # Automated startup (Windows)
-    ├── verify-system.ps1              # System verification (Windows)
-    ├── reliable-start.ps1             # Reliable startup (Windows)
-    ├── monitor-health.ps1             # Health monitoring (Windows)
-    ├── create_presentation.py         # Presentation creation utility
-    ├── test-hash-consistency.js       # Hash consistency testing
-    ├── STARTUP.bat                    # Windows batch startup
-    └── package.json                   # Root package configuration
+└── .github/
+    └── copilot-instructions.md        # AI assistant & Copilot instructions
 ```
 
-### File Count Summary:
-- **Backend Files:** 19 files (Models, Controllers, Routes, Utils, Config, Scripts)
-- **Frontend Files:** 20+ files (Pages: 8, Components, Context, Utilities, Config)
-- **Scripts & Utilities:** 8+ automation scripts and testing utilities
-- **Documentation:** Main documentation file (PROJECT_COMPLETE_DOCUMENTATION.md)
-- **Total:** 50+ files and well-organized structure
+### Current File Count Summary:
+- **Root Files:** 8 files (Documentation, setup scripts, configs)
+- **Backend Files:** 19 files (5 models, 5 controllers, 5 routes, middleware, utils, scripts, config)
+- **Frontend Files:** 25+ files (8 pages, components, context, hooks, utilities, configs, types)
+- **Frontend Models:** 18 pre-trained face-api.js model files
+- **Scripts & Utilities:** Development and testing utilities
+- **Documentation:** 3 markdown documents
+- **Total:** 70+ files in organized structure
 
 ---
 
@@ -714,35 +741,58 @@ FRONTEND_URL=http://localhost:5173
 
 ---
 
-### Step 3: Seed Database
+### Step 3: Seed Database (Initialize Election)
 
+**First Time Setup:**
 ```bash
 cd backend
 npm run seed
 ```
 
-**Creates:**
+**What Gets Created:**
 - Admin user: `admin@voting.com` / `Admin@123456`
-- 3 sample candidates
-- Election settings
+- 3 pre-configured candidates
+- Election settings initialized
+- Ready for voters to register
+
+**Advanced Database Scripts:**
+
+| Script | Command | Purpose |
+|--------|---------|---------|
+| `seed.js` | `npm run seed` | Fresh database initialization |
+| `reset-and-seed.js` | `npm run reset-seed` | Complete reset + reseed (⚠️ deletes all data) |
+| `fix-aadhaar.js` | `npm run fix-aadhaar` | Repair Aadhaar hash consistency (if needed) |
 
 ---
 
-### Step 4: Face-API Models (Already Included)
+### Step 4: Face-API Models (Already Included ✅)
 
-**✅ Models Pre-downloaded:**
+**✅ 7 Complete Face-API Models Pre-Downloaded:**
 
-The following face-api.js models are already included in `frontend/public/models/`:
+All face-api.js models are already included in `frontend/public/models/` - **no additional download needed!**
 
-1. **Tiny Face Detector** - `tiny_face_detector_model*` - Fast face detection
-2. **Face Landmarks** - `face_landmark_68_model*` - 68-point face landmarks
-3. **Face Recognition** - `face_recognition_model*` - Face embeddings (128D)
-4. **Age & Gender** - `age_gender_model*` - Age and gender detection (optional)
-5. **Face Expression** - `face_expression_model*` - Expression detection (optional)
-6. **MTCNN** - `mtcnn_model*` - Alternative face detection (optional)
-7. **SSD MobileNet** - `ssd_mobilenetv1_model*` - Alternative detection (optional)
+| Model | Files | Purpose | Usage |
+|-------|-------|---------|-------|
+| **Tiny Face Detector** | `tiny_face_detector_model-shard1`, `weights_manifest.json` | Fast face detection | ⭐ Primary detection |
+| **Face Landmarks** | `face_landmark_68_model-shard1`, `weights_manifest.json` | 68-point facial landmarks | Used for face alignment |
+| **Face Recognition** | `face_recognition_model-shard1/2`, `weights_manifest.json` | 128D face embeddings | ⭐ Core matching |
+| **Face Landmarks (Tiny)** | `face_landmark_68_tiny_model-shard1`, `weights_manifest.json` | Lightweight landmarks | Mobile optimization |
+| **Age & Gender** | `age_gender_model-shard1`, `weights_manifest.json` | Age/gender detection | Optional feature |
+| **Face Expression** | `face_expression_model-shard1`, `weights_manifest.json` | Expression detection | Optional feature |
+| **MTCNN** | `mtcnn_model-shard1`, `weights_manifest.json` | Alternative detection | Backup detection |
+| **SSD MobileNet** | `ssd_mobilenetv1_model-shard1/2`, `weights_manifest.json` | Mobile-optimized detection | Mobile devices |
 
-**No additional download needed** - all models are ready to use!
+**Model Files Status:** All 18 model files included ✅
+- Ready to use immediately
+- No internet download required
+- Loads from local `public/models/` directory
+- Optimized for college demo environments
+
+**Loading Strategy:**
+1. Face Detector loads first (tiny_face_detector)
+2. Face Recognition model loads (128D embeddings)
+3. Other models load as needed
+4. All processing happens in-browser (no server upload)
 
 ---
 
@@ -819,18 +869,18 @@ npm run dev
 
 ## 🎯 FEATURES & WORKFLOWS
 
-### Frontend Pages Overview
+### Frontend Pages Overview (8 Pages Total)
 
-| Page | Path | Purpose | Access |
-|------|------|---------|--------|
-| Home | `/` | Landing page with navigation | Public |
-| Register | `/register` | Multi-step voter registration | Public |
-| VoterLogin | `/voter/login` | Voter authentication | Public |
-| VoterProfile | `/voter/profile` | View voter details | Protected (User) |
-| Vote | `/vote` | Voting interface | Protected (User) |
-| Results | `/results` | Election results | Public (if declared) |
-| AdminLogin | `/admin/login` | Admin authentication | Public |
-| AdminDashboard | `/admin/dashboard` | Admin control panel | Protected (Admin) |
+| Page | Path | Purpose | Access | Status |
+|------|------|---------|--------|--------|
+| Home | `/` | Landing page with feature overview & navigation buttons | Public | ✅ Complete |
+| Register | `/register` | Multi-step voter registration wizard (4-step process) | Public | ✅ Complete |
+| VoterLogin | `/voter/login` | Voter authentication page for existing voters | Public | ✅ Complete |
+| VoterProfile | `/voter/profile` | Voter profile display & management page | Protected (User) | ✅ Complete |
+| Vote | `/vote` | Multi-step voting interface with verification & selection | Protected (User) | ✅ Complete |
+| Results | `/results` | Election results with charts & vote breakdown | Public (if declared) | ✅ Complete |
+| AdminLogin | `/admin/login` | Admin authentication & login | Public | ✅ Complete |
+| AdminDashboard | `/admin/dashboard` | Admin control panel with full election management | Protected (Admin) | ✅ Complete |
 
 ---
 
@@ -853,19 +903,29 @@ npm run dev
 
 ---
 
-### Feature 2: Voter Authentication & Profile
+### Feature 2: Voter Authentication & Profile Management
 
-**Voter Login Page:**
-- Dedicated login interface at `/voter/login`
+**Voter Login Page (`/voter/login`):**
+- Dedicated login interface for registered voters
 - Secure JWT-based authentication
 - Email and password validation
 - Session management with tokens
+- Token persists for continuous access
 
-**Voter Profile Page:**
-- View personal registration details
-- Check voting status
-- Display token number
+**Voter Profile Page (`/voter/profile`):**
+- View personal registration details (name, Aadhaar, DOB)
+- Check current voting status (has voted or not yet)
+- Display assigned token number (6-digit ID)
 - Profile management interface
+- Shows voter registration timestamp
+- Clear display of voting eligibility
+
+**Authentication Flow:**
+- Voter enters credentials → System validates with database
+- JWT token generated and stored in localStorage
+- Protected routes verify token validity
+- Automatic logout on token expiry
+- Secure token cleanup on logout
 
 ---
 
@@ -1212,9 +1272,39 @@ Error: Email already registered
 
 ---
 
-## 🧰 UTILITY SCRIPTS & TOOLS
+## 🧰 PROJECT COMPONENTS & UTILITIES
 
-### Frontend Utilities
+### Frontend Architecture
+
+#### Pages (8 Complete Pages)
+Located in `frontend/src/pages/`:
+- **Home.tsx** - Landing page with feature overview
+- **Register.tsx** - 4-step voter registration with face capture
+- **VoterLogin.tsx** - Voter authentication interface
+- **VoterProfile.tsx** - Display voter details & voting status
+- **Vote.tsx** - 5-step voting process with face verification
+- **Results.tsx** - Results display with Recharts visualization
+- **AdminLogin.tsx** - Admin authentication
+- **AdminDashboard.tsx** - Comprehensive admin control panel
+
+#### Components (Reusable)
+Located in `frontend/src/components/`:
+- **ProtectedRoute.tsx** - Authentication wrapper for private routes
+
+#### Context (State Management)
+Located in `frontend/src/context/`:
+- **AuthContext.tsx** - Global authentication state with provider
+  - Current user info
+  - Login/logout functions
+  - Role-based access tracking
+  - Token management
+
+#### Hooks (Custom React Hooks)
+Located in `frontend/src/hooks/`:
+- Empty directory ready for custom hooks
+- Suggested hooks to add: `useAuth()`, `useFaceApi()`, `useVoting()`
+
+#### Utilities (Helper Functions)
 
 #### validation.ts
 Provides comprehensive form and data validation:
