@@ -98,6 +98,13 @@ export const register = async (req, res) => {
 
     await profile.save();
 
+    console.log('Profile created during registration:', {
+      tokenNumber: profile.tokenNumber,
+      fullName: profile.fullName,
+      profileId: profile._id,
+      userId: savedUser._id
+    });
+
     const token = generateToken(savedUser._id, savedUser.role);
 
     res.status(201).json({

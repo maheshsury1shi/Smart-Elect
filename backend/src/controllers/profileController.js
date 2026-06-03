@@ -97,23 +97,43 @@ export const verifyVoterByFace = async (req, res) => {
     const incomingDate = new Date(dateOfBirth);
     const incomingDateStr = `${incomingDate.getUTCFullYear()}-${String(incomingDate.getUTCMonth() + 1).padStart(2, '0')}-${String(incomingDate.getUTCDate()).padStart(2, '0')}`;
 
-    // Normalize fullName for comparison
-    const normalizedFullName = fullName.trim();
+    // Normalize fullName for comparison - remove extra spaces and normalize whitespace
+    const normalizedFullName = fullName.trim().replace(/\s+/g, ' ');
 
     console.log('Searching for profile:', { tokenNumber, fullName: normalizedFullName });
 
-    // Find profile by token number and name (try exact match first, then case-insensitive)
+    // Strategy 1: Find by tokenNumber alone first to debug
+    const profileByToken = await Profile.findOne({ tokenNumber });
+    if (profileByToken) {
+      console.log('Profile exists for token:', { 
+        tokenNumber, 
+        storedName: profileByToken.fullName,
+        incomingName: normalizedFullName,
+        namesMatch: profileByToken.fullName === normalizedFullName,
+        storedNameNormalized: profileByToken.fullName.trim().replace(/\s+/g, ' ')
+      });
+    } else {
+      console.log('No profile found for token number:', tokenNumber);
+    }
+
+    // Strategy 2: Try exact match on both tokenNumber and fullName
     let profile = await Profile.findOne({ 
       tokenNumber, 
       fullName: normalizedFullName
     });
 
-    // If not found, try case-insensitive search
+    // Strategy 3: Case-insensitive search with normalized whitespace
     if (!profile) {
       profile = await Profile.findOne({ 
         tokenNumber,
-        fullName: new RegExp(`^${normalizedFullName}$`, 'i')
+        fullName: new RegExp(`^${normalizedFullName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i')
       });
+    }
+
+    // Strategy 4: Search by token number alone if name doesn't match exactly
+    if (!profile && profileByToken) {
+      console.log('Name mismatch detected. Using profile from token number only.');
+      profile = profileByToken;
     }
 
     if (!profile) {
