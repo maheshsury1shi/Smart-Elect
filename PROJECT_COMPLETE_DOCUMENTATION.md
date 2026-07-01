@@ -227,7 +227,7 @@ election-voting-system/
 │   └── dev.mjs                        # Development server utilities
 │
 └── .github/
-    └── copilot-instructions.md        # AI assistant & Copilot instructions
+    
 ```
 
 ### Current File Count Summary:
