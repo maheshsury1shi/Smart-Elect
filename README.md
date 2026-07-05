@@ -370,4 +370,10 @@ This is a college demonstration project. For features or issues, refer to the co
 
 ---
 
+# Author
+
+Mahesh Suryawanshi
+
+maheshsury1shi@gmail.com
+
 **Built for college demonstration purposes** 🎓
